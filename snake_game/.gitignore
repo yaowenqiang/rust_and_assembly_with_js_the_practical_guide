@@ -1,0 +1,35 @@
+# Rust 可执行文件
+main
+stack
+memory_demo
+memory_enhanced_main
+snake_game
+
+# 汇编和中间文件
+*.asm
+*.ll
+*.o
+*.a
+
+# Rust 编译输出
+target/
+Cargo.lock
+
+# macOS 系统文件
+.DS_Store
+
+# IDE 和编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 调试和分析文件
+*.dSYM/
+*.profraw
+*.profdata
+
+# 临时文件
+*.tmp
+*.temp
