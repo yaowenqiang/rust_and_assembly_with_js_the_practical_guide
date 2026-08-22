@@ -1,0 +1,8 @@
+# 设置断点在文件和行号
+breakpoint set --file main.rs --line 2
+# 运行程序
+run
+# 查看变量
+frame variable  
+# 继续执行
+continue

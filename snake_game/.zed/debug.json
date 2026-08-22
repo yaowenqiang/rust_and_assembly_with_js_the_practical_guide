@@ -1,0 +1,82 @@
+{
+  "configurations": [
+    {
+      "name": "Debug Current File",
+      "type": "lldb",
+      "request": "launch",
+      "cargo": {
+        "args": ["build"],
+        "filter": {
+          "name": "${file}",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "cargo_build"
+    },
+    {
+      "name": "Debug snake_game (main.rs)",
+      "type": "lldb",
+      "request": "launch",
+      "cargo": {
+        "args": ["build", "--bin", "snake_game"],
+        "filter": {
+          "name": "snake_game",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "cargo_build"
+    },
+    {
+      "name": "Debug memory_demo",
+      "type": "lldb",
+      "request": "launch",
+      "cargo": {
+        "args": ["build", "--bin", "memory_demo"],
+        "filter": {
+          "name": "memory_demo",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "cargo_build"
+    },
+    {
+      "name": "Debug memory_enhanced_main",
+      "type": "lldb",
+      "request": "launch",
+      "cargo": {
+        "args": ["build", "--bin", "memory_enhanced_main"],
+        "filter": {
+          "name": "memory_enhanced_main",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "cargo_build"
+    },
+    {
+      "name": "Debug with LLDB (Direct - main)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/target/debug/snake_game",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "sourceLanguages": ["rust"]
+    },
+    {
+      "name": "Debug with LLDB (Direct - memory_demo)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/target/debug/memory_demo",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "sourceLanguages": ["rust"]
+    }
+  ]
+}

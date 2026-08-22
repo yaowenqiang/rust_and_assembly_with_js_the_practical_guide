@@ -1,0 +1,39 @@
+{
+  "lsp": {
+    "rust-analyzer": {
+      "initialization_options": {
+        "cargo": {
+          "loadOutDirsFromCheck": true
+        },
+        "procMacro": {
+          "enable": true
+        },
+        "checkOnSave": {
+          "command": "clippy"
+        }
+      }
+    }
+  },
+  "tasks": {
+    "cargo_build": {
+      "command": "cargo",
+      "args": ["build"],
+      "label": "Cargo Build"
+    },
+    "cargo_run": {
+      "command": "cargo",
+      "args": ["run"],
+      "label": "Cargo Run"
+    },
+    "cargo_check": {
+      "command": "cargo",
+      "args": ["check"],
+      "label": "Cargo Check"
+    },
+    "cargo_test": {
+      "command": "cargo",
+      "args": ["test"],
+      "label": "Cargo Test"
+    }
+  }
+}

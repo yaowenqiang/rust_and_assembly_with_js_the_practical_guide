@@ -8,3 +8,15 @@ edition = "2024"
 [[bin]]
 name = "snake_game"
 path = "main.rs"
+
+[[bin]]
+name = "memory_demo"
+path = "memory_demo.rs"
+
+[[bin]]
+name = "memory_enhanced_main"
+path = "memory_enhanced_main.rs"
+
+[[bin]]
+name = "move"
+path = "move.rs"

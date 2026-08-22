@@ -1,0 +1,148 @@
+// Evcxr REPL 演示会话示例
+// 在终端运行: evcxr
+
+// === 基础表达式 ===
+>> 1 + 2
+3
+
+>> 2 * (3 + 4)
+14
+
+// === 变量定义 ===
+>> let x = 42;
+42
+
+>> x
+42
+
+>> x * 2
+84
+
+// === 字符串操作 ===
+>> let greeting = "Hello, Rust!";
+>> greeting.len()
+13
+
+>> greeting.to_uppercase()
+"HELLO, RUST!"
+
+// === 集合类型 ===
+>> let numbers = vec![1, 2, 3, 4, 5];
+>> numbers.iter().sum::<i32>()
+15
+
+>> numbers.into_iter().map(|x| x * 2).collect::<Vec<_>>()
+[2, 4, 6, 8, 10]
+
+// === 函数定义 ===
+>> fn add(a: i32, b: i32) -> i32 { a + b }
+()
+>> add(10, 20)
+30
+
+>> fn factorial(n: u32) -> u32 {
+>>     if n == 0 { 1 } else { n * factorial(n - 1) }
+>> }
+()
+>> factorial(5)
+120
+
+// === 结构体 ===
+>> struct Point { x: f64, y: f64 }
+>> let p = Point { x: 3.0, y: 4.0 };
+>> (p.x.powi(2) + p.y.powi(2)).sqrt()
+5.0
+
+// === 查看变量 ===
+>> :vars
+greeting: alloc::string::String = "Hello, Rust!"
+numbers: alloc::vec::Vec<i32> = [1, 2, 3, 4, 5]
+x: i32 = 42
+add: fn(i32, i32) -> i32
+factorial: fn(u32) -> u32
+p: Point
+
+// === 查看类型 ===
+>> :type "hello"
+&str
+
+>> :type vec![1, 2, 3]
+alloc::vec::Vec<i32>
+
+>> :type add
+fn(i32, i32) -> i32
+
+// === 添加外部依赖 ===
+>> :dep rand = "0.8"
+Adding dependency rand = "0.8"
+
+>> use rand::Rng;
+>> let random_number = rand::thread_rng().gen_range(1..100);
+>> random_number
+42  // 你的数字可能不同
+
+// === 闭包和迭代器 ===
+>> (1..=10).filter(|&x| x % 2 == 0).collect::<Vec<_>>()
+[2, 4, 6, 8, 10]
+
+>> let numbers = vec![1, 2, 3, 4, 5];
+>> numbers.iter().map(|x| x * x).collect::<Vec<_>>()
+[1, 4, 9, 16, 25]
+
+// === 错误处理演示 ===
+>> let result: Result<i32, &str> = Ok(42);
+>> result.unwrap()
+42
+
+>> let error_result: Result<i32, &str> = Err("Something went wrong");
+>> error_result.unwrap_err()
+"Something went wrong"
+
+// === 生命周期和借用 ===
+>> fn first_word(s: &str) -> &str {
+>>     let bytes = s.as_bytes();
+>>     for (i, &item) in bytes.iter().enumerate() {
+>>         if item == b' ' {
+>>             return &s[0..i];
+>>         }
+>>     }
+>>     &s[..]
+>> }
+()
+
+>> let sentence = "Hello world";
+>> first_word(sentence)
+"Hello"
+
+// === 模式匹配 ===
+>> let number = 42;
+>> match number {
+>>     1 => "one",
+>>     2 => "two",
+>>     _ => "other"
+>> }
+"other"
+
+// === 宏使用 ===
+>> println!("The answer is: {}", x);
+The answer is: 42
+()
+
+>> vec![1, 2, 3]
+[1, 2, 3]
+
+// === 获取帮助 ===
+>> :help
+Available commands:
+  :dep <crate> <version> - Add dependency
+  :vars - Show all variables
+  :type <expr> - Show type of expression
+  :last_compile_code - Show code from last compile
+  :time - Toggle timing of execution
+  :timing - Show compilation and execution time
+  :help - Show this help
+  :quit - Quit the REPL
+
+// === 退出 ===
+>> :quit
+Bye!
