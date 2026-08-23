@@ -40,3 +40,11 @@ path = "borrowing_rules_analysis.rs"
 [[bin]]
 name = "slices"
 path = "slices.rs"
+
+[[bin]]
+name = "box"
+path = "box.rs"
+
+[[bin]]
+name = "box_easy_examples"
+path = "box_easy_examples.rs"
