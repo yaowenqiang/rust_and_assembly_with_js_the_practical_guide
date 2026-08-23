@@ -24,3 +24,19 @@ path = "move.rs"
 [[bin]]
 name = "references"
 path = "references.rs"
+
+[[bin]]
+name = "mut"
+path = "mut.rs"
+
+[[bin]]
+name = "borrowing_complete_demo"
+path = "borrowing_complete_demo.rs"
+
+[[bin]]
+name = "borrowing_rules_analysis"
+path = "borrowing_rules_analysis.rs"
+
+[[bin]]
+name = "slices"
+path = "slices.rs"

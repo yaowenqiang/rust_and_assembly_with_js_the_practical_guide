@@ -16,9 +16,24 @@ fn main() {
     let c = 30;
 
     println!("\n=== 变量内存地址 ===");
-    println!("a: 值={}, 地址={:p}, 大小={} 字节", a, &a, mem::size_of_val(&a));
-    println!("b: 值={}, 地址={:p}, 大小={} 字节", b, &b, mem::size_of_val(&b));
-    println!("c: 值={}, 地址={:p}, 大小={} 字节", c, &c, mem::size_of_val(&c));
+    println!(
+        "a: 值={}, 地址={:p}, 大小={} 字节",
+        a,
+        &a,
+        mem::size_of_val(&a)
+    );
+    println!(
+        "b: 值={}, 地址={:p}, 大小={} 字节",
+        b,
+        &b,
+        mem::size_of_val(&b)
+    );
+    println!(
+        "c: 值={}, 地址={:p}, 大小={} 字节",
+        c,
+        &c,
+        mem::size_of_val(&c)
+    );
 
     // 3. 复合类型的内存布局
     let tuple: (i32, f64, bool) = (42, 3.14, true);
@@ -62,5 +77,8 @@ fn main() {
     println!("Vec 地址: {:p}", &vec);
     println!("Vec 容量: {}", vec.capacity());
     println!("Vec 长度: {}", vec.len());
-    println!("Vec 堆内存大小: {} 字节", vec.capacity() * mem::size_of::<i32>());
+    println!(
+        "Vec 堆内存大小: {} 字节",
+        vec.capacity() * mem::size_of::<i32>()
+    );
 }

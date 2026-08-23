@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rustc dereference_simple.rs -o dereference_simple)",
+      "Bash(./dereference_simple)",
+      "Bash(rustc dereference_easy.rs -o dereference_easy)",
+      "Bash(./dereference_easy)"
+    ]
+  }
+}

@@ -42,18 +42,37 @@ fn print_integer_numbers() {
     let bin_num = 0b0010_1011;
     let byte_num = b'A';
 
-    println!("原始输出: {} {} {} {}", custom_num, hex_num, bin_num, byte_num);
+    println!(
+        "原始输出: {} {} {} {}",
+        custom_num, hex_num, bin_num, byte_num
+    );
 
     // 内存布局分析
     println!("内存布局:");
-    println!("  custom_num: 值={}, 地址={:p}, 大小={}字节",
-        custom_num, &custom_num, mem::size_of_val(&custom_num));
-    println!("  hex_num:    值={}, 地址={:p}, 大小={}字节",
-        hex_num, &hex_num, mem::size_of_val(&hex_num));
-    println!("  bin_num:    值={}, 地址={:p}, 大小={}字节",
-        bin_num, &bin_num, mem::size_of_val(&bin_num));
-    println!("  byte_num:   值={}, 地址={:p}, 大小={}字节",
-        byte_num, &byte_num, mem::size_of_val(&byte_num));
+    println!(
+        "  custom_num: 值={}, 地址={:p}, 大小={}字节",
+        custom_num,
+        &custom_num,
+        mem::size_of_val(&custom_num)
+    );
+    println!(
+        "  hex_num:    值={}, 地址={:p}, 大小={}字节",
+        hex_num,
+        &hex_num,
+        mem::size_of_val(&hex_num)
+    );
+    println!(
+        "  bin_num:    值={}, 地址={:p}, 大小={}字节",
+        bin_num,
+        &bin_num,
+        mem::size_of_val(&bin_num)
+    );
+    println!(
+        "  byte_num:   值={}, 地址={:p}, 大小={}字节",
+        byte_num,
+        &byte_num,
+        mem::size_of_val(&byte_num)
+    );
 
     // 演示栈上的内存布局
     println!("\n栈内存顺序(从高到低):");
@@ -72,20 +91,37 @@ fn print_float_numbers() {
     let float_num_3 = 0.1_f32;
     let tup: (i32, &str, u8) = (20, "hello", 1);
 
-    println!("原始输出: {} {} {} {} {} {}",
-        float_num, float_num_2, float_num_3, tup.0, tup.1, tup.2);
+    println!(
+        "原始输出: {} {} {} {} {} {}",
+        float_num, float_num_2, float_num_3, tup.0, tup.1, tup.2
+    );
     println!("Debug格式: {:?}", tup);
 
     // 内存分析
     println!("内存分析:");
-    println!("  float_num:   值={}, 地址={:p}, 大小={}字节",
-        float_num, &float_num, mem::size_of_val(&float_num));
-    println!("  float_num_2: 值={}, 地址={:p}, 大小={}字节",
-        float_num_2, &float_num_2, mem::size_of_val(&float_num_2));
-    println!("  float_num_3: 值={}, 地址={:p}, 大小={}字节",
-        float_num_3, &float_num_3, mem::size_of_val(&float_num_3));
-    println!("  tuple:       地址={:p}, 总大小={}字节",
-        &tup, mem::size_of_val(&tup));
+    println!(
+        "  float_num:   值={}, 地址={:p}, 大小={}字节",
+        float_num,
+        &float_num,
+        mem::size_of_val(&float_num)
+    );
+    println!(
+        "  float_num_2: 值={}, 地址={:p}, 大小={}字节",
+        float_num_2,
+        &float_num_2,
+        mem::size_of_val(&float_num_2)
+    );
+    println!(
+        "  float_num_3: 值={}, 地址={:p}, 大小={}字节",
+        float_num_3,
+        &float_num_3,
+        mem::size_of_val(&float_num_3)
+    );
+    println!(
+        "  tuple:       地址={:p}, 总大小={}字节",
+        &tup,
+        mem::size_of_val(&tup)
+    );
 
     let (a, b, c) = tup;
     println!("解构后: {} {} {}", a, b, c);
@@ -104,10 +140,18 @@ fn print_float_numbers() {
     let string_heap = String::from("world");
 
     println!("\n字符串内存对比:");
-    println!("  字符串字面量: '{}' 地址={:p}, 大小={}字节",
-        string_literal, &string_literal, mem::size_of_val(&string_literal));
-    println!("  String堆分配: '{}' 地址={:p}, 大小={}字节",
-        string_heap, &string_heap, mem::size_of_val(&string_heap));
+    println!(
+        "  字符串字面量: '{}' 地址={:p}, 大小={}字节",
+        string_literal,
+        &string_literal,
+        mem::size_of_val(&string_literal)
+    );
+    println!(
+        "  String堆分配: '{}' 地址={:p}, 大小={}字节",
+        string_heap,
+        &string_heap,
+        mem::size_of_val(&string_heap)
+    );
     println!("    堆数据地址: {:?}", string_heap.as_ptr());
     println!("    容量: {} 字节", string_heap.capacity());
 }
