@@ -33,7 +33,10 @@ fn demonstrate_box_basics() {
     let stack_array = [1, 2, 3];
     let boxed_array = Box::new([1, 2, 3]);
     println!("栈上数组大小: {} 字节", mem::size_of::<[i32; 3]>());
-    println!("Box<[i32; 3]> 大小: {} 字节", mem::size_of::<Box<[i32; 3]>>());
+    println!(
+        "Box<[i32; 3]> 大小: {} 字节",
+        mem::size_of::<Box<[i32; 3]>>()
+    );
 }
 
 fn demonstrate_struct_basics() {
@@ -80,7 +83,7 @@ fn demonstrate_box_vs_stack() {
     println!("Box 大小: {} 字节", mem::size_of::<Box<i32>>());
 
     // 大数据类型
-    let large_stack = [0u8; 1000];    // 1000 字节数组在栈上
+    let large_stack = [0u8; 1000]; // 1000 字节数组在栈上
     let large_heap = Box::new([0u8; 1000]); // 1000 字节数组在堆上
 
     println!("\n大数据类型:");

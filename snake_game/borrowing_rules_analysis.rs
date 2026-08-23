@@ -38,7 +38,7 @@ fn demonstrate_fix_approach() {
     let message_2: &mut String = &mut message;
     message_2.push_str(" world");
     // println!("{}", message);  // 不使用原始变量
-    println!("只使用可变引用: {}", message_2);  // ✅ 正确
+    println!("只使用可变引用: {}", message_2); // ✅ 正确
 
     // 方法2: 分离作用域
     let mut message = String::from("Hello");
@@ -46,15 +46,15 @@ fn demonstrate_fix_approach() {
         let message_2: &mut String = &mut message;
         message_2.push_str(" world");
         println!("作用域内: {}", message_2);
-    }  // 可变借用在此结束
-    println!("作用域外: {}", message);  // ✅ 现在可以使用 message
+    } // 可变借用在此结束
+    println!("作用域外: {}", message); // ✅ 现在可以使用 message
 
     // 方法3: 使用完后才打印
     let mut message = String::from("Hello");
     let message_2: &mut String = &mut message;
     message_2.push_str(" world");
-    println!("{}", message_2);  // 先使用可变引用
-    println!("{}", message);    // 可变引用使用完后，再使用原变量 ✅
+    println!("{}", message_2); // 先使用可变引用
+    println!("{}", message); // 可变引用使用完后，再使用原变量 ✅
 }
 
 fn demonstrate_borrowing_rules() {
@@ -107,7 +107,7 @@ fn demonstrate_valid_patterns() {
         mut_ref.push_str(" mutation");
         println!("作用域内: {}", mut_ref);
     }
-    let immutable_ref = &data;  // 可变借用已结束
+    let immutable_ref = &data; // 可变借用已结束
     println!("作用域外: {}", immutable_ref);
 }
 
