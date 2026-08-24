@@ -2,12 +2,9 @@
 name = "snake_game"
 version = "0.1.0"
 edition = "2024"
+default-run = "snake_game"
 
 [dependencies]
-
-[[bin]]
-name = "snake_game"
-path = "src/main.rs"
 
 [[bin]]
 name = "memory_demo"
