@@ -45,3 +45,7 @@ path = "box.rs"
 [[bin]]
 name = "box_easy_examples"
 path = "box_easy_examples.rs"
+
+[[bin]]
+name = "module_demo_runner"
+path = "src/bin/module_demo_runner.rs"
