@@ -10,6 +10,7 @@ fn outsider() {
 }
 
 pub mod learning_rust {
+    use std::fmt;
     pub mod top_level {
         pub fn hi_there() {
             println!("Hi, there!");
@@ -23,12 +24,22 @@ pub mod learning_rust {
         }
     }
     pub trait Log {}
-    
+
     #[derive(Debug)]
     pub struct Person {
         pub name: String,
         pub last_name: String,
         pub age: u32,
+    }
+
+    impl fmt::Display for Person {
+        fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+            write!(
+                f,
+                "my name is :{} last name is : {}",
+                self.name, self.last_name
+            )
+        }
     }
 
     impl Person {

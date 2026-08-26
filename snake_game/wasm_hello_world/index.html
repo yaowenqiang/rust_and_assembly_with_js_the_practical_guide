@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rust WebAssembly Hello World</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+        .function-test {
+            margin: 25px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .function-test h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        input {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            margin: 5px;
+            font-size: 14px;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #e8f5e8;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            border-left: 4px solid #4CAF50;
+        }
+        .loading {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+            font-size: 18px;
+        }
+        .error {
+            color: #d32f2f;
+            background-color: #ffebee;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        .emoji {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .status {
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #e3f2fd;
+            border-radius: 6px;
+            color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Rust WebAssembly Hello World</h1>
+        
+        <div id="loading" class="loading">
+            <div class="emoji">⏳</div>
+            正在加载 WebAssembly 模块...
+        </div>
+
+        <div id="content" style="display: none;">
+            <div class="status">
+                <div class="emoji">✅</div>
+                WebAssembly 模块加载完成！请尝试以下功能：
+            </div>
+
+            <div class="function-test">
+                <h3><span class="emoji">👋</span>问候函数</h3>
+                <input type="text" id="nameInput" placeholder="输入你的名字" value="World">
+                <button onclick="testGreet()">测试问候</button>
+                <div class="result" id="greetResult"></div>
+            </div>
+
+            <div class="function-test">
+                <h3><span class="emoji">➕</span>加法计算</h3>
+                <input type="number" id="num1" placeholder="第一个数" value="5">
+                <input type="number" id="num2" placeholder="第二个数" value="3">
+                <button onclick="testAdd()">计算加法</button>
+                <div class="result" id="addResult"></div>
+            </div>
+
+            <div class="function-test">
+                <h3><span class="emoji">⭕</span>圆面积计算</h3>
+                <input type="number" id="radius" placeholder="半径" value="2.0" step="0.1">
+                <button onclick="testCircleArea()">计算面积</button>
+                <div class="result" id="circleResult"></div>
+            </div>
+
+            <div class="function-test">
+                <h3><span class="emoji">🔄</span>字符串反转</h3>
+                <input type="text" id="textInput" placeholder="输入文本" value="Hello WebAssembly">
+                <button onclick="testReverse()">反转字符串</button>
+                <div class="result" id="reverseResult"></div>
+            </div>
+
+            <div class="function-test">
+                <h3><span class="emoji">📊</span>数组求和</h3>
+                <input type="text" id="arrayInput" placeholder="数组元素，逗号分隔" value="1,2,3,4,5">
+                <button onclick="testSumArray()">计算求和</button>
+                <div class="result" id="sumResult"></div>
+            </div>
+
+            <div class="function-test">
+                <h3><span class="emoji">📝</span>控制台日志</h3>
+                <input type="text" id="logInput" placeholder="日志消息" value="Hello from Rust WASM!">
+                <button onclick="testLog()">发送日志</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import init, * as wasm from './pkg/wasm_hello_world.js';
+
+        async function run() {
+            try {
+                await init();
+                // 关键：使用命名导入的 wasm 绑定对象（自动处理字符串转换），
+                // 而不是 init() 返回的原始 WASM 实例（返回的是内存指针数字）
+                window.wasm = wasm;
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+
+                console.log('🎉 WebAssembly 模块加载完成!');
+                console.log('📦 可用函数:', Object.keys(wasm));
+                
+            } catch (error) {
+                console.error('❌ 加载 WebAssembly 失败:', error);
+                document.getElementById('loading').innerHTML = 
+                    `<div class="error">
+                        <div class="emoji">❌</div>
+                        加载失败: ${error.message}<br><br>
+                        请确保已运行构建命令:<br>
+                        <code>cd wasm_hello_world && ./build.sh</code>
+                    </div>`;
+            }
+        }
+
+        run();
+    </script>
+
+    <script>
+        function testGreet() {
+            const name = document.getElementById('nameInput').value;
+            const result = window.wasm.greet(name);
+            document.getElementById('greetResult').textContent = result;
+        }
+
+        function testAdd() {
+            const num1 = parseInt(document.getElementById('num1').value);
+            const num2 = parseInt(document.getElementById('num2').value);
+            const result = window.wasm.add_numbers(num1, num2);
+            document.getElementById('addResult').textContent = `${num1} + ${num2} = ${result}`;
+        }
+
+        function testCircleArea() {
+            const radius = parseFloat(document.getElementById('radius').value);
+            const result = window.wasm.calculate_circle_area(radius);
+            document.getElementById('circleResult').textContent = `半径 ${radius} 的圆面积: ${result.toFixed(4)}`;
+        }
+
+        function testReverse() {
+            const text = document.getElementById('textInput').value;
+            const result = window.wasm.reverse_string(text);
+            document.getElementById('reverseResult').textContent = `原文本: "${text}" → 反转后: "${result}"`;
+        }
+
+        function testSumArray() {
+            const input = document.getElementById('arrayInput').value;
+            const numbers = input.split(',').map(x => parseInt(x.trim())).filter(x => !isNaN(x));
+            const result = window.wasm.sum_array(numbers);
+            document.getElementById('sumResult').textContent = `数组 [${numbers.join(', ')}] 的和: ${result}`;
+        }
+
+        function testLog() {
+            const message = document.getElementById('logInput').value;
+            window.wasm.log_message(message);
+            alert(`✅ 已发送日志: "${message}" (查看浏览器控制台)`);
+        }
+    </script>
+</body>
+</html>
