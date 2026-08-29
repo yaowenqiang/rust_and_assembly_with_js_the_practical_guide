@@ -1,2 +1,12 @@
 snake_game/target/
 snake_game/main
+snake_game/enum
+snake_game/enum_easy_examples
+snake_game/enum_examples
+snake_game/metaprogramming_examples
+snake_game/module_system_examples
+snake_game/trait
+snake_game/trait_complete_analysis
+snake_game/trait_easy_examples
+node_modules
+snake_rust/target

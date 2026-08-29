@@ -4,7 +4,12 @@
       "Bash(rustc dereference_simple.rs -o dereference_simple)",
       "Bash(./dereference_simple)",
       "Bash(rustc dereference_easy.rs -o dereference_easy)",
-      "Bash(./dereference_easy)"
+      "Bash(./dereference_easy)",
+      "Bash(rustc:*)",
+      "Bash(./trait_complete_analysis:*)",
+      "Bash(./trait_easy_examples)",
+      "Bash(git commit -m ':*)",
+      "Bash(cargo init:*)"
     ]
   }
 }

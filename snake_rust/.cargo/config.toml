@@ -1,0 +1,4 @@
+# 本机的 registry 镜像（rsproxy.cn）网络不通；依赖已在本地缓存中，
+# 让 cargo 默认离线构建，直接 `cargo run` 即可。
+[net]
+offline = true
